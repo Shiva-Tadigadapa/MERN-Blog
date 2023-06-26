@@ -30,7 +30,6 @@
     "react-router": "^6.9.0",
     "react-shimmer": "^3.2.0",
     "redux": "^4.2.1",
-    "react-lottie": "^1.2.3",
     "styled-components": "^5.3.9",
     "vite-plugin-next-react-router": "^0.6.2"
   },
