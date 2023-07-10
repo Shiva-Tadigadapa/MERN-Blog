@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
-import Lottie from "react-lottie";
+// import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 import animationData from "../../lotties/anima.json";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
