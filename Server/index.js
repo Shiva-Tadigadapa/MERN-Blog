@@ -96,7 +96,7 @@ const connect = () => {
 
 app.use(
   cors({
-    origin: ["https://64abc73a51fcd53a174f30ff--spectacular-florentine-c71119.netlify.app/","https://mern-blog-wine.vercel.app", "https://backbone-l7ed.onrender.com/", "http://localhost:3000"],
+    origin: ["https://spectacular-florentine-c71119.netlify.app/","https://mern-blog-wine.vercel.app", "https://backbone-l7ed.onrender.com/", "http://localhost:3000"],
     // origin: "http://localhost:3000,
     credentials: true,
   })
