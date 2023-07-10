@@ -96,7 +96,8 @@ const connect = () => {
 
 app.use(
   cors({
-    origin: "https://mern-blog-wine.vercel.app",
+    origin: ["https://mern-blog-wine.vercel.app", "https://mern-blog-wine.vercel.app/", "http://localhost:3000"],
+    // origin: "http://localhost:3000,
     credentials: true,
   })
 );
