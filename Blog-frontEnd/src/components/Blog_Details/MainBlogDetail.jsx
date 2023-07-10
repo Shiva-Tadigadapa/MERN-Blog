@@ -23,6 +23,7 @@ const MainBlogDetail = () => {
           console.log(error);
         });
     };
+    
     getBlog();
     const addView = async()=>{
       const res = await axios.post(`http://localhost:8000/blog/addview/${id}/view`)
