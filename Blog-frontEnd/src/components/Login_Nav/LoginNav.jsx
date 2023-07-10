@@ -7,7 +7,8 @@ import { loginStart, loginSuccess, logout1 } from "../../redux/userSlice";
 import { selectUser } from "../../redux/userSlice";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Lottie from "react-lottie";
+// import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 import animationData from "../../lotties/anima.json";
 import SearchBar from "./SearchBar";
 
