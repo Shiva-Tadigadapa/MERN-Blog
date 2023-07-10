@@ -59,7 +59,7 @@ const Home = () => {
 
     async function send() {
       dispatch(loginStart());
-      const res = await axios.get("https://mern-blog-9lrx.vercel.app/api/profile", config);
+      const res = await axios.get("https://backbone-l7ed.onrender.com/api/profile", config);
       // .then(response=>{
       // console.log(response)
       console.log(res.data);
@@ -81,7 +81,7 @@ const Home = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const res = axios
-          .post("https://mern-blog-9lrx.vercel.app/api/google", {
+          .post("https://backbone-l7ed.onrender.com/api/google", {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
@@ -105,7 +105,7 @@ const Home = () => {
   useEffect(() => {
     const getAllBlogs = async () => {
       const res = await axios
-        .get("https://mern-blog-9lrx.vercel.app/blog/getallblog")
+        .get("https://backbone-l7ed.onrender.com/blog/getallblog")
         .then((response) => {
           // console.log(response.data[0]);
 
@@ -117,7 +117,7 @@ const Home = () => {
     };
     getAllBlogs();
     const getallTrendingBlogs = async () => {
-      const res = await axios.get("https://mern-blog-9lrx.vercel.app/blog/trending")
+      const res = await axios.get("https://backbone-l7ed.onrender.com/blog/trending")
       .then((response) => {
         // console.log(response.data[0]);
         setTrendingBlog(response.data);

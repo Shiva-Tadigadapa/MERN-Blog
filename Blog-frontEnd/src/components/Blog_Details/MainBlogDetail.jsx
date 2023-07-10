@@ -13,7 +13,7 @@ const MainBlogDetail = () => {
   useEffect(() => {
     const getBlog = async () => {
       const res = await axios
-        .get(`https://mern-blog-9lrx.vercel.app/blog/getblog/${id}`)
+        .get(`https://backbone-l7ed.onrender.com/blog/getblog/${id}`)
         .then((response) => {
           // console.log(response.data)
           setBlogDetails(response.data);
@@ -26,7 +26,7 @@ const MainBlogDetail = () => {
     
     getBlog();
     const addView = async()=>{
-      const res = await axios.post(`https://mern-blog-9lrx.vercel.app/blog/addview/${id}/view`)
+      const res = await axios.post(`https://backbone-l7ed.onrender.com/blog/addview/${id}/view`)
       .then((response)=>{
         console.log(response.data)
       }

@@ -19,7 +19,7 @@ export default function PopoverPopupState(props) {
     const {blogId} = props;
     const handelDelete = async() => {
         console.log(blogId)
-        const deleteBlog = await axios.delete(`https://mern-blog-9lrx.vercel.app/blog/delete/${blogId}/${_id}`);
+        const deleteBlog = await axios.delete(`https://backbone-l7ed.onrender.com/blog/delete/${blogId}/${_id}`);
 
     }
   return (

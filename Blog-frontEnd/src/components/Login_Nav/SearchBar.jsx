@@ -11,7 +11,7 @@ const SearchBar = () => {
 
   const getSerchResult = (txt) => {
     console.log(txt);
-    axios.get(`https://mern-blog-9lrx.vercel.app/blog/search/${txt}`).then((res) => {
+    axios.get(`https://backbone-l7ed.onrender.com/blog/search/${txt}`).then((res) => {
       console.log(res.data);
       setSearchTerm(res.data);
     });

@@ -15,7 +15,7 @@ function Register() {
     // console.log(username, email, password)
     dispatch(loginStart())
     try{
-      const res= await axios.post('https://mern-blog-9lrx.vercel.app/api/signup',{name,email,password})
+      const res= await axios.post('https://backbone-l7ed.onrender.com/api/signup',{name,email,password})
       console.log(res)
        alert('User Created')
     }

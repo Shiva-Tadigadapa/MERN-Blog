@@ -18,7 +18,7 @@ const Myblogs = () => {
 
     useEffect(() => {
         const getBlogsofUser = async () => {
-            const res = await axios.get(`https://mern-blog-9lrx.vercel.app/blog/getblogsofuser/${u_id}`).then((response)=>{
+            const res = await axios.get(`https://backbone-l7ed.onrender.com/blog/getblogsofuser/${u_id}`).then((response)=>{
               // console.log(response.data[0]._id)
                 setBlogDetails(response.data)
 

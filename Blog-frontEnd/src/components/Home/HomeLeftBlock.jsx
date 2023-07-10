@@ -14,7 +14,7 @@ const tagsList = useSelector(tagList);
   useEffect(() => {
     const getAllTags = async() => {
       
-      const res = await axios.get('https://mern-blog-9lrx.vercel.app/blog/getAllTags').then((response)=>{
+      const res = await axios.get('https://backbone-l7ed.onrender.com/blog/getAllTags').then((response)=>{
         console.log(response.data)
         const tagsData = response.data;
          console.log(tagsData.action)

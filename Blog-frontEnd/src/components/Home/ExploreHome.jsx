@@ -18,10 +18,10 @@ const ExploreHome = ( props) => {
 
     async function handelLike(_id) {
       
-      const res = await axios.post(`https://mern-blog-9lrx.vercel.app/blog/like/${_id}`);
+      const res = await axios.post(`https://backbone-l7ed.onrender.com/blog/like/${_id}`);
      
       await axios
-        .get("https://mern-blog-9lrx.vercel.app/blog/getallblog/like")
+        .get("https://backbone-l7ed.onrender.com/blog/getallblog/like")
         .then((response) => {
           
   
