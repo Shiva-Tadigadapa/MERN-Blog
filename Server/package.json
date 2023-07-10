@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "node-cache": "^5.1.2",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "uid": "^2.0.2"
   }
 }
