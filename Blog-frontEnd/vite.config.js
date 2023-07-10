@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['react', 'react-lottie'],
+      external: ['react-lottie'],
     },
   },
 });
