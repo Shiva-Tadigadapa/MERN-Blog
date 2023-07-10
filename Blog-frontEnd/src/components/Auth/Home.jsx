@@ -59,7 +59,7 @@ const Home = () => {
 
     async function send() {
       dispatch(loginStart());
-      const res = await axios.get("http://localhost:8000/api/profile", config);
+      const res = await axios.get("https://mern-blog-9lrx.vercel.app/api/profile", config);
       // .then(response=>{
       // console.log(response)
       console.log(res.data);
@@ -81,7 +81,7 @@ const Home = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const res = axios
-          .post("http://localhost:8000/api/google", {
+          .post("https://mern-blog-9lrx.vercel.app/api/google", {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
@@ -105,7 +105,7 @@ const Home = () => {
   useEffect(() => {
     const getAllBlogs = async () => {
       const res = await axios
-        .get("http://localhost:8000/blog/getallblog")
+        .get("https://mern-blog-9lrx.vercel.app/blog/getallblog")
         .then((response) => {
           // console.log(response.data[0]);
 
@@ -117,7 +117,7 @@ const Home = () => {
     };
     getAllBlogs();
     const getallTrendingBlogs = async () => {
-      const res = await axios.get("http://localhost:8000/blog/trending")
+      const res = await axios.get("https://mern-blog-9lrx.vercel.app/blog/trending")
       .then((response) => {
         // console.log(response.data[0]);
         setTrendingBlog(response.data);

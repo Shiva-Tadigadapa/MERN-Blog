@@ -70,7 +70,7 @@ function NavBar() {
     async function send() {
       dispatch(loginStart());
       const res = await axios
-        .get("http://localhost:8000/api/profile", config)
+        .get("https://mern-blog-9lrx.vercel.app/api/profile", config)
         .then((res) => {
           console.log(res);
           dispatch(loginSuccess(res.data));

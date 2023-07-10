@@ -18,7 +18,7 @@ const BlogDetailSideBar = (props) => {
     const getFollowing = async () => {
       const res = await axios
         .get(
-          `http://localhost:8000/api/getFollowing/${blogDetails.authorU}/${userDetail._id}/getfollow`
+          `https://mern-blog-9lrx.vercel.app/api/getFollowing/${blogDetails.authorU}/${userDetail._id}/getfollow`
         )
         .then((response) => {
           setFollowers(response.data.authorUser.followers.length);
@@ -35,7 +35,7 @@ const BlogDetailSideBar = (props) => {
     const followRequest = async () => {
       const res = await axios
         .post(
-          `http://localhost:8000/api/followRequest/${blogDetails.authorU}/${userDetail._id}`
+          `https://mern-blog-9lrx.vercel.app/api/followRequest/${blogDetails.authorU}/${userDetail._id}`
         )
         .then((response) => {
           console.log(response.data.followers);

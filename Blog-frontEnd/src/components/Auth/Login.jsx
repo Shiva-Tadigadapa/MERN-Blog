@@ -24,7 +24,7 @@ function Login() {
     event.preventDefault();
     console.log(name, email, password)
     try{
-      const response=await axios.post('http://localhost:8000/api/signin',{name,email,password},{credentials:'include'})
+      const response=await axios.post('https://mern-blog-9lrx.vercel.app/api/signin',{name,email,password},{credentials:'include'})
       console.log(response.data)
     navigate('/home')
 
@@ -43,7 +43,7 @@ const config = {
   }
 }
 
-axios.get('http://localhost:8000/api/profile',config)
+axios.get('https://mern-blog-9lrx.vercel.app/api/profile',config)
 .then(response=>{
   console.log(response)
 

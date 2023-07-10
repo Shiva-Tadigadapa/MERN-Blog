@@ -26,7 +26,7 @@ const EditPost = () => {
 
   useEffect(() => {
     const getBlog = async () => {
-        const res = await axios.get(`http://localhost:8000/blog/getblog/${Blog_id}`).then((response)=>{
+        const res = await axios.get(`https://mern-blog-9lrx.vercel.app/blog/getblog/${Blog_id}`).then((response)=>{
             console.log(response.data)
             setBlogDetails(response.data)
             setTitle(response.data.title)
@@ -56,7 +56,7 @@ const EditPost = () => {
     } 
     console.log(Blog_details);
       try{
-       const res= await axios.put(`http://localhost:8000/blog/update/${Blog_id}`,Blog_details)
+       const res= await axios.put(`https://mern-blog-9lrx.vercel.app/blog/update/${Blog_id}`,Blog_details)
         console.log(res);
         
       }catch(err){

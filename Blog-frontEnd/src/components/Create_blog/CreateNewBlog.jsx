@@ -20,7 +20,7 @@ const CreateNewBlog = () => {
     publicKey:"public_u7kxH7LgunPNp3hdLZv7edHsbBI=",
     privateKey:"private_8CshqjFmGQTjPw/kXsyOixM5ctM=",
     urlEndpoint:"https://ik.imagekit.io/7da6fpjdo/coverImg",
-    authenticationEndpoint:"http://localhost:8000/blog/auth",
+    authenticationEndpoint:"https://mern-blog-9lrx.vercel.app/blog/auth",
 
 
   })
@@ -99,7 +99,7 @@ const CreateNewBlog = () => {
     } 
     console.log(Blog_details);
       try{
-       const res= await axios.post('http://localhost:8000/blog/upload',Blog_details)
+       const res= await axios.post('https://mern-blog-9lrx.vercel.app/blog/upload',Blog_details)
         console.log(res);
         
       }catch(err){
