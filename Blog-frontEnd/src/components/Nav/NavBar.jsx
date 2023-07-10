@@ -15,9 +15,9 @@ import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/logo-standard.svg";
-import Landing from "../Logout_Nav/Landing";
-import SIgnUp from "../Logout_Nav/SIgnUp";
-import Login from './/../Logout_Nav/Login'
+import Landing from '../Logout_Nav/Landing';
+import SIgnUp from '../Logout_Nav/SIgnUp';
+import Login from '../Logout_Nav/Login'
 import SearchBar from "../Login_Nav/SearchBar";
 // import { auth, provider } from '../../firebase'
 import { auth, provider } from "../../firebase";
