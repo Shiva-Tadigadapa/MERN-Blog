@@ -50,12 +50,7 @@ const tagsList = useSelector(tagList);
                 Bookmarks
               </p>
             </div>
-            <div className="mt-[10px] hover:bg-slate-500 flex  items-center">
-              <p className="p-1 pl-4  flex text-center items-center">
-                <MdOutlineExplore className="mr-2.5 inline-block  font-[300] text-[25px]" />
-                Hackanthons
-              </p>
-            </div>
+          
             <div className="mt-[10px] hover:bg-slate-500 flex  items-center">
               <p className="p-1 pl-4 flex text-center items-center ">
                 <MdOutlineExplore className="mr-2.5 inline-block  font-[300] text-[25px]" />
