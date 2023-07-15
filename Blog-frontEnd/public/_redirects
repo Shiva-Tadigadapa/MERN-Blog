@@ -1,1 +1,13 @@
-/* /index.html 200
+/                   /index.html      200
+/home               /index.html      200
+/Profile            /index.html      200
+/createBlog         /index.html      200
+/*/*                /index.html      200
+/MyBlogs/*          /index.html      200
+/editBlog/*         /index.html      200
+/search/*           /index.html      200
+/author/*           /index.html      200
+/Profile/*          /index.html      200
+
+# 404 route - fallback for all other paths
+/*                  /index.html      404
