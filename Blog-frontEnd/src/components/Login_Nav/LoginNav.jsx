@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import img from "../../assets/logo-standard.svg";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -12,18 +12,16 @@ import Lottie from "lottie-react";
 import animationData from "../../lotties/anima.json";
 import SearchBar from "./SearchBar";
 
-
 const LoginNav = () => {
-
   //  localStorage.removeItem("access_token");
-const  authorName=  localStorage.getItem("authorName");
-    const [signUpTrue, setSignUpTrue] = useState(true);
+  const authorName = localStorage.getItem("authorName");
+  const [signUpTrue, setSignUpTrue] = useState(true);
   const [loginTrue, setLoginTrue] = useState(false);
-// const [authorName, setAuthorName] = useState("");
+  // const [authorName, setAuthorName] = useState("");
   const dispatch = useDispatch();
-  
+
   // const {_id} = currentUser;
-  
+
   // console.log(_id,"in login nav")
 
   const navigate = useNavigate();
@@ -57,7 +55,7 @@ const  authorName=  localStorage.getItem("authorName");
   const currentUser = useSelector(selectUser);
   // console.log(currentUser, "in login nav");
   // console.log(currentUser && currentUser._id, "in login nav");
-  const id =currentUser && currentUser._id;
+  const id = currentUser && currentUser._id;
   // console.log(id, "in logidfgfdgdfgdfgn nav")
   // const { _id } = currentUser;
   // console.log(_id, "in login nav")
@@ -65,19 +63,19 @@ const  authorName=  localStorage.getItem("authorName");
     async function send() {
       dispatch(loginStart());
       const res = await axios
-      .get("https://backbone-l7ed.onrender.com/api/profile", config)
-      .then((res) => {
-        console.log(res);
-        dispatch(loginSuccess(res.data));
-        var newStr = res.data.name.split("");
-  
-        for (var i = 0; i < newStr.length; ++i) {
-          if (newStr[i] === " ") {
-            newStr[i] = "-";
+        .get("https://backbone-l7ed.onrender.com/api/profile", config)
+        .then((res) => {
+          console.log(res);
+          dispatch(loginSuccess(res.data));
+          var newStr = res.data.name.split("");
+
+          for (var i = 0; i < newStr.length; ++i) {
+            if (newStr[i] === " ") {
+              newStr[i] = "-";
+            }
           }
-        } 
-        localStorage.setItem("authorName",  `@${newStr.join('')}`);
-        // setAuthorName(``)
+          localStorage.setItem("authorName", `@${newStr.join("")}`);
+          // setAuthorName(``)
           // navigate('/home')
         })
         .catch((err) => {
@@ -130,61 +128,60 @@ const  authorName=  localStorage.getItem("authorName");
   // }, []);
 
   function logout() {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("authorName");
-      dispatch(logout1());
-      console.log("logoutdergre");
-      navigate("/");
-      window.location.reload();
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("authorName");
+    dispatch(logout1());
+    console.log("logoutdergre");
+    navigate("/");
+    window.location.reload();
     // setRedirect(false)
   }
 
   return (
     <div className="  bg-[--one-color]    p-4">
-    <div className="flex     justify-between">
-      <a href="/home" className=" w-36 cursor-pointer">
-      <img className="w-36" src={img} />
-      </a>
-      <SearchBar />
-      {/* <input className='rounded-lg shadow-2xl pr-24 border-none  pl-5' type="text" placeholder='search'/> */}
-      <div className=" flex items-center">
-
-      <div className=" flex  text-md   ">
-        <p className="pr-10">
-          <a>
-            <Link to={`/home`}>Home</Link>
-          </a>
-        </p>
-        <p className="pr-10">
-          <a>
-            <Link to={`/MyBlogs/${id}`}>Blog</Link>
-          </a>
-        </p>
-        <p className="pr-10">
-          <a className="cursor-pointer">
-            <Link to={`/Profile/${authorName}`}>Profile</Link>
-          </a>
-        </p>
-        <p className="pr-10">
-          <a>
-            <Link to="/createBlog">createBlog</Link>
-          </a>
-        </p>
-      </div>
-      <div className="flex  items-center justify-center">
-        <p
-          onClick={logout}
-          className="mr-4  background-animate
+      <div className="flex     justify-between">
+        <a href="/home" className=" w-36 cursor-pointer">
+          <img className="w-36" src={img} />
+        </a>
+        <SearchBar />
+        {/* <input className='rounded-lg shadow-2xl pr-24 border-none  pl-5' type="text" placeholder='search'/> */}
+        <div className=" flex items-center">
+          <div className=" flex  text-md   ">
+            <p className="pr-10">
+              <a>
+                <Link to={`/home`}>Home</Link>
+              </a>
+            </p>
+            <p className="pr-10">
+              <a>
+                <Link to={`/MyBlogs/${id}`}>Blog</Link>
+              </a>
+            </p>
+            <p className="pr-10">
+              <a className="cursor-pointer">
+                <Link to={`/Profile/${authorName}`}>Profile</Link>
+              </a>
+            </p>
+            <p className="pr-10">
+              <a>
+                <Link to="/createBlog">createBlog</Link>
+              </a>
+            </p>
+          </div>
+          <div className="flex  items-center justify-center">
+            <p
+              onClick={logout}
+              className="mr-4  background-animate
           hover:bg-gradient-to-r from-[#ebd9ec] via-[#fdb19c] to-[#d0b0ff]    rounded-lg tracking-[0.5px] flex  items-center justify-center cursor-pointer hover:bg-blue-200 text-gray-900 
           hover:text-gray-900  transition-all  shadow-2xl bg-[#c3cfd4] pr-5 pt-2 pl-5 pb-2"
-          >
-          logout
-        </p>
-      </div>
+            >
+              logout
+            </p>
           </div>
+        </div>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default LoginNav
+export default LoginNav;

@@ -28,7 +28,7 @@ const tagsList = useSelector(tagList);
   }, [])
   return (
     <div
-          className=" h-[100%]  rounded-lg   shadow-md  text-[#343a40]  bg-[--darkmd-color]  grow-[.2] mr-3 sticky top-[30px] "
+          className=" h-[100%]  rounded-lg   shadow-md  text-[#343a40]  bg-[#DDE6ED]  grow-[.2] mr-3 sticky top-[30px] "
           style={{ boxShadow: " 0 4px 6px rgba(0, 0, 0, 0.1)" }}
         >
           <div className=" text-[18px]    tracking-[.5px] ">

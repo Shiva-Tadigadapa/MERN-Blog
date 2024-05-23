@@ -1,116 +1,121 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { MdOutlineExplore } from 'react-icons/md'
-import axios from 'axios'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { Image, Shimmer } from 'react-shimmer'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { MdOutlineExplore } from "react-icons/md";
+import axios from "axios";
+import { Image, Shimmer } from "react-shimmer";
+import DOMPurify from "dompurify";
 
-const ExploreHome = ( props) => {
+const ExploreHome = (props) => {
   let blogDetails1 = props.blogDetails;
-    // console.log(blogDetails1)
+  console.log(blogDetails1);
   const [blogDetails, setBlogDetails] = useState([]);
+
   useEffect(() => {
-    setBlogDetails(blogDetails1)
+    setBlogDetails(blogDetails1);
     // console.log(blogDetails)
-    
   }, [blogDetails1]);
 
-    async function handelLike(_id) {
-      
-      const res = await axios.post(`https://backbone-l7ed.onrender.com/blog/like/${_id}`);
-     
-      await axios
-        .get("https://backbone-l7ed.onrender.com/blog/getallblog/like")
-        .then((response) => {
-          
-  
-          setBlogDetails(response.data.reverse());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+  async function handelLike(_id) {
+    const res = await axios.post(
+      `https://backbone-l7ed.onrender.com/blog/like/${_id}`
+    );
+
+    await axios
+      .get("https://backbone-l7ed.onrender.com/blog/getallblog/like")
+      .then((response) => {
+        setBlogDetails(response.data.reverse());
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
-    (blogDetails &&
-      blogDetails.map((item) => (
-    <div className="pl-5 pr-5 ">
-    <div className="flex pt-5 ">
-      <div className="   ">
-      <img className="w-[50px]   rounded-full" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1679571103557/ZBf6AnvIE.png?w=400&h=400&fit=crop&crop=faces&auto=compress,format&format=webp"/>
-      </div>
-      <div className="ml-[12px]">
-      <Link to={`/author/${item.authorName}`} >
-      <p className=" text-md tracking-[0.7px] font-bold">{item.orginalName}</p>
-      </Link>
-      <div className="flex  text-md text-gray-600">
-        <p>{item.authorMail}</p>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <p>Mar 31,2023</p>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <p>views :{item.views}</p>
-      </div>
-      </div>
-    </div>
-   <div className="pt-4 pb-5">
-    <div className="flex justify-between">
-      <div>
-              <Link to={`/${item.authorName}/${item._id}`} >
-      <p className="hover:text-black/70 text-2xl font-[500]">{item.title}</p>
-        </Link>
-      <p className="pt-1 text-gray-400 font-medium ">5 min read</p>
-      <p className="pt-1 text-gray-600    w-[450px] overflow-hidden   leading-[1.325] text-[16.5px]  "  dangerouslySetInnerHTML={{ __html: item.content && item.content.slice(0,200) }} />
-      </div>
-      <Link to={`/${item.authorName}/${item._id}`} >
-
-      <img className="  mr-0 w-64 h-36 border-gray-300 border-[1px] rounded-md" src={item.image}/>
-      </Link>
-    </div>
-    <div className="flex pt-4  justify-between ">
-      <div className="flex  whitespace-nowrap text-ellipsis w-40" >
-        {
-          item.tags && item.tags.slice(0,3  ).map((item) => (
-              <Link to={`/search/${item}`} >
-            <div className="mr-3 hover:bg-blue-200 flex justify-center border-[1px] border-gray-300 text-gray-600 rounded-md pt-0.5 pl-2.5 pr-2.5 pb-0.5">
-         <p className="w-[100%]  overflow-hidden whitespace-nowrap text-ellipsis">{item}</p>
-        </div>
-        </Link>
-          ))  
-        }
-        {/* <div className="mr-3  flex justify-center border-[1px] border-gray-300 text-gray-600 rounded-md pt-0.5 pl-2.5 pr-2.5 pb-0.5">
-         <p className="w-[100%]  overflow-hidden whitespace-nowrap text-ellipsis">FrontEnd Development</p>
-        </div>
-        <div className="border-[1px]  flex justify-center border-gray-300 text-gray-600 rounded-md pt-0.5 pl-2.5 pr-2.5 pb-0.5">
-        <p className="w-[110px]  overflow-hidden whitespace-nowrap text-ellipsis">FrontEnd Development</p>
-        </div> */}
-      </div>
-      <div className="">
-        <div className=" flex">
-        <div className="flex items-center justify-start text-gray-500" >
-          <img className="mr-1.5 w-[20px] h-[20px]" src="\src\assets\heart.png"  
-          onClick={() => {
-            handelLike(item._id);
-          }}
-          
+    blogDetails &&
+    blogDetails.map((item) => (
+      <div
+        className="pl-6 py-5   w-[95%]  mb-6  rounded-3xl border"
+        key={item._id}
+      >
+        <div className="flex gap-1 items-center justify-start">
+          <img
+            src="https://cdn.hashnode.com/res/hashnode/image/upload/v1679571103557/ZBf6AnvIE.png?w=400&h=400&fit=crop&crop=faces&auto=compress,format&format=webp"
+            alt="profile"
+            className="w-10 h-10 rounded-full"
           />
-
-        <p  className="pr-5">{item.likes}</p>
-
-        <img className="mr-1.5 w-[20px] h-[20px]" src="\src\assets\message.png"/>
-        <p className="pr-5">45</p>
+          <div className="flex  flex-col">
+            <div>
+              <span className="text-sm font-semibold text-gray-700 ml-2">
+                {item.authorName.startsWith("@")
+                  ? item.authorName.substring(1)
+                  : item.authorName}
+              </span>
+            </div>
+            <div className=" flex items-center gap-1 -mt-1">
+              <span className="text-sm font-semibold text-gray-500 ml-2">
+                {item.authorMail}
+              </span>
+              <div className=" h-1 w-1 rounded-full bg-gray-400 "></div>
+              <span className="text-sm font-semibold text-gray-500 ">
+                {formatDate(item.createdAt)}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="flex">
-      <img className="w-[30px]   rounded-full" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1679910444433/9ca5067a-4069-4305-97e3-631152e6715c.jpeg?w=500&h=500&fit=crop&crop=faces&auto=compress,format&format=webp"/>
-      <img className="w-[30px]   rounded-full" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1679910444433/9ca5067a-4069-4305-97e3-631152e6715c.jpeg?w=500&h=500&fit=crop&crop=faces&auto=compress,format&format=webp"/>
-      <img className="w-[30px]   rounded-full" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1679910444433/9ca5067a-4069-4305-97e3-631152e6715c.jpeg?w=500&h=500&fit=crop&crop=faces&auto=compress,format&format=webp"/>
-        </div>
+        <Link to={`/blog/${item._id}`}>
+          <div className="flex py-2 gap-5 items-center justify-start">
+            <div className=" w-[65%] gap-2 flex  flex-col">
+              <h1 className="text-2xl mt-2 font-semibold text-gray-800">
+                {item.title}
+              </h1>
+              <p
+                className="text-md font-normal text-gray-600 truncated-content"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(item.content),
+                }}
+              ></p>
+            </div>
+            <div>
+              <img
+                src={item.image}
+                alt="blog-image"
+                className="w-48 h-28 object-cover rounded-lg"
+              />
+            </div>
+          </div>
+        </Link>
+        <div className=" flex gap-5  mt-1">
+          <div className=" items-center justify-start gap-2 flex font-mono">
+            <p className="text-sm font-semibold text-gray-700 ml-2">
+              {item.likes} Likes
+            </p>
+            <div className=" h-1 w-1 rounded-full bg-gray-500 "></div>
+            <p className="text-sm font-semibold text-gray-700 ">
+              {item.views} Reads
+            </p>
+          </div>
+          <div>
+            <div className="flex flex-row gap-2  ">
+              {item.tags.slice(0, 2).map((tag) => (
+                <span
+                  key={tag}
+                  className="text-sm bg-gray-100 p-2  rounded-md font-semibold text-gray-600 ml-2"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div> 
-</div>
-)))
-  )
-}
+    ))
+  );
+};
 
-export default ExploreHome
+export default ExploreHome;

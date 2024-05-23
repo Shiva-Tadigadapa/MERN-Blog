@@ -30,9 +30,9 @@ const SearchBar = () => {
     <>
       <div className="   ">
         <input
-          className="rounded-lg  text-white
+          className="rounded-lg  
           background-animate
-          bg-gradient-to-r  from-[#cc543393] to-[#23074da2]   focus:shadow-2xl pl-5 h-12 w-[32rem] border-none  
+           focus:shadow-2xl pl-5 h-12 w-[32rem] border-none  
               appearance-none   text-gray-700 leading-tight focus:outline-none focus:bg-[#90c4ff81] bg-[#d3dee9]
               "
           type="text"
