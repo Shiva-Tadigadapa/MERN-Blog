@@ -6,7 +6,7 @@ const articles = [
     title: "Building a REST-API with Node.js and Express.js Step",
     author: "ByteScrum Techo",
     reads: 61,
-    likes: 91,
+    likes: 41,
   },
   {
     title: "Understanding JavaScript Closures",
