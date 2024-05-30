@@ -5,8 +5,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/userSlice";
+import { GetStates } from "use-context-provider";
 const BlogDetailSideBar = (props) => {
   const blogDetails = props.blogDetails;
+
+  const { state } = GetStates();
   // console.log(blogDetails)
 
   const userDetail = useSelector(selectUser);
@@ -14,22 +17,22 @@ const BlogDetailSideBar = (props) => {
   const [followBtn, setFollowBtn] = useState(false);
   const [followers, setFollowers] = useState(0);
 
-  useEffect(() => {
-    const getFollowing = async () => {
-      const res = await axios
-        .get(
-          `https://backbone-l7ed.onrender.com/api/getFollowing/${blogDetails.authorU}/${userDetail._id}/getfollow`
-        )
-        .then((response) => {
-          setFollowers(response.data.authorUser.followers.length);
-          setFollowBtn(response.data.isFollowed);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getFollowing();
-  }, [followBtn, []]);
+  // useEffect(() => {
+  //   const getFollowing = async () => {
+  //     const res = await axios
+  //       .get(
+  //         `https://backbone-l7ed.onrender.com/api/getFollowing/${blogDetails.authorU}/${userDetail._id}/getfollow`
+  //       )
+  //       .then((response) => {
+  //         setFollowers(response.data.authorUser.followers.length);
+  //         setFollowBtn(response.data.isFollowed);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
+  //   getFollowing();
+  // }, [followBtn, []]);
 
   const followRequest = () => {
     const followRequest = async () => {
@@ -53,115 +56,46 @@ const BlogDetailSideBar = (props) => {
     console.log("follow request");
   };
   return (
-    <div className="">
-      <div className="bg-[#ffffff] w-[28rem] pl-7  sticky top-[20px]   ">
-        <div className="">
-          <div className="flex   pt-10  items-center">
-            <img
-              className="rounded-full h-[4.5rem]"
-              src="https://miro.medium.com/v2/resize:fill:176:176/1*kZ7ApQjqvCYB8_08t4avOA.jpeg"
-              alt=""
-            />
-            <div className="flex flex-col pl-4 justify-center">
-              <h1 className="text-xl">{blogDetails.orginalName}</h1>
-              <p>{followers && followers} followers</p>
+    <div className=" bg-white rounded-lg border overflow-hidden">
+      <div className=" w-[23rem]    sticky top-[20px]    ">
+        <div className=" relative">
+          <div className="w-full bg-black  top-0 overflow-hidden  h-10 absolute -z-[1]"></div>
+          <div className=" flex flex-col    pt-6 px-4 justify-start z-[10]">
+            <div className=" flex items-center gap-3">
+              <img
+                src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+                alt=""
+                className="w-12 h-12 rounded-full"
+              />
+              <h1 className="text-2xl font-bold pt-5">{state.Name}</h1>
             </div>
-          </div>
-          {followBtn ? (
-            <button
-              onClick={followRequest}
-              className="bg-slate-600 text-white w-24  mt-3  h-10 rounded-lg"
-            >
-              Unfollow
-            </button>
-          ) : (
-            <button
-              onClick={followRequest}
-              className="bg-slate-600 text-white w-24  mt-3  h-10 rounded-lg"
-            >
-              Follow
-            </button>
-          )}
 
-          <hr className="-ml-7 mt-9 " />
-        </div>
-        <p className="mt-5 font-bold capitalize tracking-wide">
-          more from medium
-        </p>
+            <div className=" flex items-center   gap-5">
+              {followBtn ? (
+                <button
+                  onClick={followRequest}
+                  className="bg-slate-600 text-white w-32  mt-3  h-10 rounded-lg"
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                  onClick={followRequest}
+                  className="bg-slate-600 text-white w-32  mt-3  h-10 rounded-lg"
+                >
+                  Follow
+                </button>
+              )}
+              <p className=" text-xl mt-4 font-mono text-gray-500">
+                {followers && followers} followers
+              </p>
+            </div>
 
-        <div className="">
-          <div>
-              <div className="flex justify-between  ">
-              <div className="flex flex-col">
-                <div className="flex items-center pt-4 pb-2">
-                  <img
-                    className="rounded-full h-8 "
-                    src="https://miro.medium.com/v2/resize:fill:176:176/1*kZ7ApQjqvCYB8_08t4avOA.jpeg"
-                    alt=""
-                  />
-                  <p className="text-sm pl-2">hello moto hifhhnj</p>
-                </div>
-                <p className="w-52  text-[16px] tracking-wide  font-semibold">
-                  Why Experienced Programmers Fail Coding Interviews
-                </p>
-              </div>
-              <div className="flex pr-10">
-                <img
-                  className="rounded h-14 mt-6"
-                  src="https://ik.imagekit.io/7da6fpjdo/coverImg/c2d4f878fc_g8zGpkOSL"
-                  alt=""
-                />
-              </div>
+            <p className="mt-4 ">Hey 👋,Welcome to my blog.</p>
+            <div className="mt-5 mb-5 text-gray-500">
+              <p className=" text-xs  font-semibold">JOINED</p>
+              <p className=" text-sm">Oct 25, 2020</p>
             </div>
-            <hr className="mt-4 w-[90%]  " />
-            <div className="flex justify-between  ">
-              <div className="flex flex-col">
-                <div className="flex items-center pt-4 pb-2">
-                  <img
-                    className="rounded-full h-8 "
-                    src="https://miro.medium.com/v2/resize:fill:176:176/1*kZ7ApQjqvCYB8_08t4avOA.jpeg"
-                    alt=""
-                  />
-                  <p className="text-sm pl-2">hello moto hifhhnj</p>
-                </div>
-                <p className="w-52  text-[16px] tracking-wide  font-semibold">
-                  Why Experienced Programmers Fail Coding Interviews
-                </p>
-              </div>
-              <div className="flex pr-10">
-                <img
-                  className="rounded h-14 mt-6"
-                  src="https://ik.imagekit.io/7da6fpjdo/coverImg/c2d4f878fc_g8zGpkOSL"
-                  alt=""
-                />
-              </div>
-            </div>
-            <hr className="mt-4 w-[90%] " />
-            <div className="flex justify-between  ">
-              <div className="flex flex-col">
-                <div className="flex items-center pt-4 pb-2">
-                  <img
-                    className="rounded-full h-8 "
-                    src="https://miro.medium.com/v2/resize:fill:176:176/1*kZ7ApQjqvCYB8_08t4avOA.jpeg"
-                    alt=""
-                  />
-                  <p className="text-sm pl-2">hello moto hifhhnj</p>
-                </div>
-                <p className="w-52  text-[16px] tracking-wide  font-semibold">
-                  Why Experienced Programmers Fail Coding Interviews
-                </p>
-              </div>
-              <div className="flex pr-10">
-                <img
-                  className="rounded h-14 mt-6"
-                  src="https://ik.imagekit.io/7da6fpjdo/coverImg/c2d4f878fc_g8zGpkOSL"
-                  alt=""
-                />
-              </div>
-            </div>
-            <hr className="mt-4 w-[90%]  mb-10" />
-
-            <hr className="mt-4 w-[90%]  mb-10" />
           </div>
         </div>
       </div>

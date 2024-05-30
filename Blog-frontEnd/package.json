@@ -24,6 +24,7 @@
     "imagekitio-react": "^2.0.0",
     "lottie-react": "^2.4.0",
     "material-ui-popup-state": "^5.0.8",
+    "novel": "^0.4.2",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -37,6 +38,7 @@
     "redux": "^4.2.1",
     "styled-components": "^5.3.9",
     "uid": "^2.0.2",
+    "use-context-provider": "^3.2.0",
     "vite-plugin-next-react-router": "^0.6.2"
   },
   "devDependencies": {

@@ -11,18 +11,21 @@ import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import animationData from "../../lotties/anima.json";
 import SearchBar from "./SearchBar";
+import { NewState } from "use-context-provider";
 
 const LoginNav = () => {
   //  localStorage.removeItem("access_token");
   const authorName = localStorage.getItem("authorName");
+  // console.log(authorName, "in login nav");
   const [signUpTrue, setSignUpTrue] = useState(true);
   const [loginTrue, setLoginTrue] = useState(false);
   // const [authorName, setAuthorName] = useState("");
+  const [userName, setUserName] = NewState("UserName", "");
+  const [Name, setName] = NewState("Name", "");
+  const [authorMail, setAuthorMail] = NewState("AuthorMail", "");
+   
+  //  setUserName(authorName);
   const dispatch = useDispatch();
-
-  // const {_id} = currentUser;
-
-  // console.log(_id,"in login nav")
 
   const navigate = useNavigate();
 
@@ -75,6 +78,10 @@ const LoginNav = () => {
             }
           }
           localStorage.setItem("authorName", `@${newStr.join("")}`);
+          setUserName(authorName);
+          setName(res.data.name);
+          setAuthorMail(res.data.email);
+         
           // setAuthorName(``)
           // navigate('/home')
         })

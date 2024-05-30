@@ -51,7 +51,7 @@ const Home = () => {
     const fetchBlogs = async () => {
       try {
         const res = await axios.get(
-          "https://backbone-l7ed.onrender.com/blog/getallblog"
+          "https://backbone-l7ed.onrender.com/blog/getallInitial"
         );
         setBlogDetails(res.data.reverse());
       } catch (error) {
@@ -142,7 +142,7 @@ const Home = () => {
 
       <div className="h-[100%] w-[30%] rounded-xl sticky border top-[30px]">
         <HomeRightBlock />
-      </div>  
+      </div>
     </div>
   );
 };
