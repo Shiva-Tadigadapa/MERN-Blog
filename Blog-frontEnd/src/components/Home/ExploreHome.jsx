@@ -68,7 +68,7 @@ const ExploreHome = (props) => {
             </div>
           </div>
         </div>
-        <Link to={`/blog/${item._id}`}>
+        <Link to={`/blog/${item.BlogId}`}>
           <div className="flex py-2 gap-5 items-center justify-start">
             <div className=" w-[65%] gap-2 flex  flex-col">
               <h1 className="text-2xl mt-2 font-semibold text-gray-800">

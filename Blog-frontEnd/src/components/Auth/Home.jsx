@@ -54,6 +54,7 @@ const Home = () => {
           "https://backbone-l7ed.onrender.com/blog/getallInitial"
         );
         setBlogDetails(res.data.reverse());
+        console.log(res.data);
       } catch (error) {
         console.error("Error fetching blogs: ", error);
       }

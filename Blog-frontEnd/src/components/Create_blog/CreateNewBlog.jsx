@@ -99,7 +99,7 @@ const CreateNewBlog = () => {
         Blog_initail_content
       };
       const res = await axios.post(
-        "http://localhost:3000/blog/upload",
+        "https://backbone-l7ed.onrender.com/blog/upload",
         combinedData
       );
       console.log(res);

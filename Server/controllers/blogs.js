@@ -36,6 +36,7 @@ export const uploadBlog = async (req, res, next) => {
             image: image,
             tags: tags,
         })
+        await newBlog.save();
         const initialData = new initialBlogData({
             title: title,
             content: para,
@@ -43,11 +44,12 @@ export const uploadBlog = async (req, res, next) => {
             authorName: authorName,
             authorMail: authorMail,
             image: imageUrl,
+            BlogId: newBlog._id
         })
 
-        await newBlog.save();
         await initialData.save();
-        res.json(newBlog)
+        // console.log(newBlog, initialData)
+        res.json(initialData)
         // const {title,content,
         // } = req.body;
 

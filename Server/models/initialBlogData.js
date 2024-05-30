@@ -35,6 +35,10 @@ const initialBlogDataSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    BlogId: {
+        type: String,
+        required: true,
+    },
     date: {
         type: Date,
         default: Date.now
