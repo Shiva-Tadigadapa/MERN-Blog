@@ -12,24 +12,8 @@ const ExploreHome = (props) => {
 
   useEffect(() => {
     setBlogDetails(blogDetails1);
-    // console.log(blogDetails)
+    console.log(blogDetails)
   }, [blogDetails1]);
-
-  async function handelLike(_id) {
-    const res = await axios.post(
-      `https://backbone-l7ed.onrender.com/blog/like/${_id}`
-    );
-
-    await axios
-      .get("https://backbone-l7ed.onrender.com/blog/getallblog/like")
-      .then((response) => {
-        setBlogDetails(response.data.reverse());
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -63,7 +47,7 @@ const ExploreHome = (props) => {
               </span>
               <div className=" h-1 w-1 rounded-full bg-gray-400 "></div>
               <span className="text-sm font-semibold text-gray-500 ">
-                {formatDate(item.createdAt)}
+                {formatDate(item.date)}
               </span>
             </div>
           </div>

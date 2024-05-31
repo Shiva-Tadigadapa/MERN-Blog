@@ -145,7 +145,10 @@ export const likeBlogPost = async (req, res, next) => {
     try {
         const blog = await Blog.findById(req.params.id);
         blog.likes = blog.likes + 1;
+        const updatedBlog = await initialBlogData.findOneAndUpdate({ BlogId: req.params.id }, { likes: blog.likes }, { new: true });
         await blog.save();
+        await updatedBlog.save();
+        
         res.json(blog.likes)
         // res.json("The blog has been liked")
     }
@@ -242,7 +245,9 @@ export const addView = async (req, res, next) => {
     try {
         const blog = await Blog.findById(req.params.id);
         blog.views = blog.views + 1;
+        const updatedBlog = await initialBlogData.findOneAndUpdate({ BlogId: req.params.id }, { views: blog.views }, { new: true });
         await blog.save();
+        await updatedBlog.save();
         res.json(blog.views)
     }
     catch (err) {

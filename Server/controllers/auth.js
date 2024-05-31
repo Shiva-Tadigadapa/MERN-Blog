@@ -119,39 +119,42 @@ export const googleAuth = async (req,res,next)=>{
 }
 
 
-export const followRequest = async (req,res,next)=>{
-   // res.json(req.body)
-
-   try{
-       const user = await User.findById(req.params.followId);
-         const currentUser = await User.findById(req.params.followerId);
-       const isFollowed = user.followers.includes(req.params.followerId);
-         const isFollowing = currentUser.following.includes(req.params.followId);
-         // console.log(isFollowed,isFollowing)
-         if(isFollowed && isFollowing){
-            user.followers.pull(req.params.followerId);
-            currentUser.following.pull(req.params.followId);
-         }
-         else{
-            user.followers.push(req.params.followerId);
-            currentUser.following.push(req.params.followId);
-         }
-
-         await user.save();
-         await currentUser.save();
-
-         // console.log(user,currentUser)
-         // console.log(user,currentUser)
-
-
-      //  await user.save();
-       res.json(user)
-      // res.json(req.body)
+export const followRequest = async (req, res, next) => {
+   const { followId, followerId } = req.params;
+ 
+   // Check if followerId is a valid ObjectId
+   if (!mongoose.Types.ObjectId.isValid(followerId)) {
+     return next(createError('Invalid follower ID', 400));
    }
-   catch(err){
-       next(createError(err.message,500))  
+ 
+   try {
+     // Find user to be followed by username
+     const user = await User.findOne({ name: followId });
+     const currentUser = await User.findById(followerId);
+ 
+     if (!user || !currentUser) {
+       return next(createError('User not found', 404));
+     }
+ 
+     const isFollowed = user.followers.includes(followerId);
+     const isFollowing = currentUser.following.includes(user._id);
+ 
+     if (isFollowed && isFollowing) {
+       user.followers.pull(followerId);
+       currentUser.following.pull(user._id);
+     } else {
+       user.followers.push(followerId);
+       currentUser.following.push(user._id);
+     }
+ 
+     await user.save();
+     await currentUser.save();
+     const followerCount = user.followers.length;
+     res.json(followerCount);
+   } catch (err) {
+     next(createError(err.message, 500));
    }
-}
+ };
 
 export const getFollowing =async(req,res,next)=>{
 

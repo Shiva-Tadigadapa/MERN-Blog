@@ -36,15 +36,14 @@ const BlogDetailSideBar = (props) => {
 
   const followRequest = () => {
     const followRequest = async () => {
+      console.log(blogDetails, userDetail._id);
       const res = await axios
         .post(
-          `https://backbone-l7ed.onrender.com/api/followRequest/${blogDetails.authorU}/${userDetail._id}`
+          `https://backbone-l7ed.onrender.com/api/followRequest/${blogDetails.authorName}/${userDetail._id}`
         )
         .then((response) => {
-          console.log(response.data.followers);
-          //get the size of the array
-          // console.log(response.data.followers.length)
-          setFollowers(response.data.followers.length);
+          // console.log(response.data);
+          // setFollowers(response.data);
         })
         .catch((error) => {
           console.log(error);

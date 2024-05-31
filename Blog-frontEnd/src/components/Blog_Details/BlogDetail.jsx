@@ -36,6 +36,10 @@ const BlogDetail = (props) => {
     if (!textContent) return null;
 
     return textContent.map((textItem, textIndex) => {
+      if (textItem.type === "hardBreak") {
+        return <br key={textIndex} />;
+      }
+
       let content = textItem.text;
 
       if (textItem.marks && textItem.marks.length > 0) {
@@ -89,7 +93,10 @@ const BlogDetail = (props) => {
       return <React.Fragment key={textIndex}>{content}</React.Fragment>;
     });
   };
-
+  const formatDate = (dateString) => {
+    const options = { month: "short", day: "numeric", year: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   return (
     <>
       <div className="bg-white overflow-hidden rounded-xl">
@@ -107,7 +114,9 @@ const BlogDetail = (props) => {
             />
             <div className="flex items-start flex-col">
               <p className="text-xl font-semibold">{state.Name}</p>
-              <p className="text-xs">posted on</p>
+              <p className="text-xs text-gray-500">
+                posted on {formatDate(blogDetails.date)}
+              </p>
             </div>
           </div>
         </div>
@@ -143,7 +152,7 @@ const BlogDetail = (props) => {
                 }
               case "paragraph":
                 return (
-                  <p className="mt-10 text-lg mb-1.5" key={index}>
+                  <p className="mt-8 text-lg mb-1.5 " key={index}>
                     {item.content && renderTextContent(item.content)}
                   </p>
                 );

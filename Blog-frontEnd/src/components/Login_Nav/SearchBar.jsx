@@ -33,7 +33,7 @@ const SearchBar = () => {
           className="rounded-lg  
           background-animate
            focus:shadow-2xl pl-5 h-12 w-[32rem] border-none  
-              appearance-none   text-gray-700 leading-tight focus:outline-none focus:bg-[#90c4ff81] bg-[#d3dee9]
+              appearance-none   text-gray-700 leading-tight focus:outline-none focus:bg-[#abc4e281] bg-[#dbdee0]
               "
           type="text"
           onChange={getText}

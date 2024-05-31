@@ -42,7 +42,7 @@ const CreateNewBlog = () => {
       console.log("No changes made.");
       return;
     }
-
+    console.log("localitem", localitem)
     let localitemParsed = JSON.parse(localitem);
     let contentParagraph = "";
     let imageUrl = "";
