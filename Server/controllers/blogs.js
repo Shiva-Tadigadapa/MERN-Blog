@@ -257,7 +257,7 @@ export const getAllTrending = async (req, res, next) => {
         const cacheKey = 'trending';
         let trending = cache.get(cacheKey);
         // if (!trending) {
-        const blogs = await Blog.find();
+        const blogs = await initialBlogData.find();
         const blogs1 = blogs.sort((a, b) => b.views + b.likes - (a.views + a.likes));
         // cache.set(cacheKey, blogs1); // store result in cache
         // }
