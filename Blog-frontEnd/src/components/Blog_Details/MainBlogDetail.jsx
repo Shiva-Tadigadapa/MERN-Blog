@@ -19,11 +19,12 @@ const MainBlogDetail = () => {
   // const { state } = GetStates();
   const userDetail = useSelector(selectUser);
 
-
   useEffect(() => {
     const getBlog = async () => {
       try {
-        const response = await axios.get(`https://backbone-l7ed.onrender.com/blog/getblog/${id}`);
+        const response = await axios.get(
+          `https://backbone-l7ed.onrender.com/blog/getblog/${id}`
+        );
         setBlogDetails(response.data);
         console.log(blogDetails);
       } catch (error) {
@@ -34,7 +35,9 @@ const MainBlogDetail = () => {
     getBlog();
     const addView = async () => {
       try {
-        const response = await axios.post(`https://backbone-l7ed.onrender.com/blog/addview/${id}/view`);
+        const response = await axios.post(
+          `https://backbone-l7ed.onrender.com/blog/addview/${id}/view`
+        );
         console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -45,10 +48,11 @@ const MainBlogDetail = () => {
 
   const handleLike = async () => {
     try {
-      const response = await axios.post(`https://backbone-l7ed.onrender.com/blog/like/${id}`);
+      const response = await axios.post(
+        `https://backbone-l7ed.onrender.com/blog/like/${id}`
+      );
       console.log(response.data);
       setLike(response.data);
-    
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +64,10 @@ const MainBlogDetail = () => {
         <div>
           {/* {showConfetti && <Confetti className="mt-40" width={155} height={155} />} */}
           <div className="p-4 hidden rounded-xl  lg:flex flex-col gap-6 w-full sticky top-[10px]">
-            <div className="flex justify-between flex-col items-center" onClick={handleLike}>
+            <div
+              className="flex justify-between flex-col items-center"
+              onClick={handleLike}
+            >
               <AiOutlineHeart className="text-3xl hover:text-red-500 hover:cursor-pointer" />
               <p>{(like && like) || (blogDetails && blogDetails.likes)}</p>
             </div>
@@ -85,7 +92,7 @@ const MainBlogDetail = () => {
           <div className="sticky top-[10px]">
             <BlogDetailSideBar blogDetails={blogDetails} />
           </div>
-        </div>
+        </div>  
       </div>
     </>
   );

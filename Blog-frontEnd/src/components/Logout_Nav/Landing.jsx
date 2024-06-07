@@ -3,10 +3,26 @@ import React from "react";
 import SIgnUp from "./SIgnUp";
 import Login from "./Login";
 import { useMainDashContext } from "../../context/AppContext";
+import { useNavigate } from "react-router";
+import { useState,useEffect } from "react";
 
 const Landing = () => {
   const { SignUpTrue, setSignUpTrue } = useMainDashContext();
 
+  const token = localStorage.getItem("access_token");
+  const [redirect, setRedirect] = useState(false);
+  // console.log(token, "in app")
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      setRedirect(true);
+      // alert("You are already logged in");
+      navigate("/home");
+    } else {
+      setRedirect(false);
+    }
+  }, [token, navigate]);
   const handleSignUpClick = () => {
     setSignUpTrue(SignUpTrue ? false : true);
   };

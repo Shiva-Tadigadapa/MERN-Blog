@@ -29,8 +29,21 @@ const LoginNav = () => {
 
   const navigate = useNavigate();
 
-  // const [redirect, setRedirect] = useState(false)
   const token = localStorage.getItem("access_token");
+  const [redirect, setRedirect] = useState(false);
+
+  // // useEffect(() => {
+  // alert("You are already logged in");
+  // if (token) {
+  //   setRedirect(true);
+  //   navigate("/home");
+  // } else {
+  //   setRedirect(false);
+  // }
+  // // }, []);
+
+  // const [redirect, setRedirect] = useState(false)
+
   // console.log(token,"in app")
   // if(!token){
   //   navigate('/')

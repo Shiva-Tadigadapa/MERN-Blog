@@ -10,6 +10,7 @@ import HomeRightBlock from "../Home/HomeRightBlock";
 import { TfiRssAlt } from "react-icons/tfi";
 import Sticky from "react-stickynode";
 import { IoMdTrendingUp } from "react-icons/io";
+import  Landing from "../Login_Nav/LoginNav";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState("personized");
@@ -95,6 +96,8 @@ const Home = () => {
   // };
 
   return (
+    <>
+    <Landing />
     <div className="flex     items-start justify-normal lg:justify-center max-w-[1600px]  bg-white p-4">
       <div className=" lg:ml-10 w-[60%]">
         <div className="rounded-lg w-[100%] mt-2 flex  ">
@@ -144,7 +147,10 @@ const Home = () => {
       <div className="h-[100%] hidden lg:block w-[30%] rounded-xl sticky border top-[30px]">
         <HomeRightBlock />
       </div>
+
     </div>
+    </>
+
   );
 };
 
