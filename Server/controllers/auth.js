@@ -119,60 +119,95 @@ export const googleAuth = async (req,res,next)=>{
 }
 
 
+
+
 export const followRequest = async (req, res, next) => {
    const { followId, followerId } = req.params;
  
-   // Check if followerId is a valid ObjectId
-   if (!mongoose.Types.ObjectId.isValid(followerId)) {
-     return next(createError('Invalid follower ID', 400));
-   }
- 
    try {
      // Find user to be followed by username
-     const user = await User.findOne({ name: followId });
-     const currentUser = await User.findById(followerId);
- 
-     if (!user || !currentUser) {
-       return next(createError('User not found', 404));
+     const userToFollow = await User.findOne({ name: followId });
+     if (!userToFollow) {
+       return next(createError(`User with username ${followId} not found`, 404));
      }
  
-     const isFollowed = user.followers.includes(followerId);
-     const isFollowing = currentUser.following.includes(user._id);
- 
-     if (isFollowed && isFollowing) {
-       user.followers.pull(followerId);
-       currentUser.following.pull(user._id);
-     } else {
-       user.followers.push(followerId);
-       currentUser.following.push(user._id);
+     // Check if the user is already following
+     if (userToFollow.followers.includes(followerId)) {
+       return next(createError(`You are already following ${followId}`, 400));
      }
  
-     await user.save();
-     await currentUser.save();
-     const followerCount = user.followers.length;
-     res.json(followerCount);
+     // Update the followers and following lists atomically
+     await User.findByIdAndUpdate(userToFollow._id, { $addToSet: { followers: followerId } });
+     await User.findByIdAndUpdate(followerId, { $addToSet: { following: userToFollow._id } });
+ 
+     // Retrieve the updated userToFollow document to get the followers count
+     const updatedUserToFollow = await User.findById(userToFollow._id);
+ 
+     res.status(200).json({ 
+       message: `Successfully followed ${followId}`, 
+       followersCount: updatedUserToFollow.followers.length 
+     });
    } catch (err) {
      next(createError(err.message, 500));
    }
  };
-
-export const getFollowing =async(req,res,next)=>{
-
-   console.log(req.params.UserId,req.params.authorId)
-   try{
-      const user = await User.findById(req.params.UserId);
-      const authorUser = await User.findById(req.params.authorId);
-      const isFollowed = authorUser.followers.includes(req.params.UserId);
-      // const isFollowing = authorUser.following.includes(req.params.UserId);
-      console.log(isFollowed)
-      // const following = await User.find({_id:user.following})
-      // console.log(req.params.userId)
-      // res.json(isFollowed)
-//send the user and the author user as the response
-      res.json({authorUser,isFollowed})
+ 
+ export const unfollowRequest = async (req, res, next) => {
+   const { followId, followerId } = req.params;
+ 
+   try {
+     // Find user to be unfollowed by username
+     const userToUnfollow = await User.findOne({ name: followId });
+     if (!userToUnfollow) {
+       return next(createError(`User with username ${followId} not found`, 404));
+     }
+ 
+     // Check if the user is not following
+     if (!userToUnfollow.followers.includes(followerId)) {
+       return next(createError(`You are not following ${followId}`, 400));
+     }
+ 
+     // Update the followers and following lists atomically
+     await User.findByIdAndUpdate(userToUnfollow._id, { $pull: { followers: followerId } });
+     await User.findByIdAndUpdate(followerId, { $pull: { following: userToUnfollow._id } });
+ 
+     // Retrieve the updated userToUnfollow document to get the followers count
+     const updatedUserToUnfollow = await User.findById(userToUnfollow._id);
+ 
+     res.status(200).json({ 
+       message: `Successfully unfollowed ${followId}`, 
+       followersCount: updatedUserToUnfollow.followers.length 
+     });
+   } catch (err) {
+     next(createError(err.message, 500));
    }
-   catch(err){
-      next(createError(err.message,500))  
-   }
+ };
+ 
+ 
+ 
 
-}
+ export const getFollowing = async (req, res, next) => {
+   const { followId, followerId } = req.params;
+ 
+   try {
+     // Find the user to be checked by username
+     const userToCheck = await User.findOne({ name: followId });
+     if (!userToCheck) {
+       return next(createError(`User with username ${followId} not found`, 404));
+     }
+ 
+     // Check if the current logged-in user is following the userToCheck
+     const isFollowing = userToCheck.followers.includes(followerId);
+ 
+     // Get the follower count
+     const followersCount = userToCheck.followers.length;
+ 
+     res.status(200).json({ 
+       isFollowing, 
+       followersCount 
+     });
+   } catch (err) {
+     next(createError(err.message, 500));
+   }
+ };
+ 

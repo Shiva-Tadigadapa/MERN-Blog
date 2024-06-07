@@ -95,8 +95,8 @@ const Home = () => {
   // };
 
   return (
-    <div className="flex     items-start justify-center max-w-[1600px]  bg-white p-4">
-      <div className=" ml-10 w-[60%]">
+    <div className="flex     items-start justify-normal lg:justify-center max-w-[1600px]  bg-white p-4">
+      <div className=" lg:ml-10 w-[60%]">
         <div className="rounded-lg w-[100%] mt-2 flex  ">
           <div
             onClick={() => handleTabChange("personized")}
@@ -141,7 +141,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="h-[100%] w-[30%] rounded-xl sticky border top-[30px]">
+      <div className="h-[100%] hidden lg:block w-[30%] rounded-xl sticky border top-[30px]">
         <HomeRightBlock />
       </div>
     </div>

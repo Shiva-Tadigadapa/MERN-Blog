@@ -1,5 +1,5 @@
 import express from "express";
-import { signin, signup,profile, getFollowing,followRequest, CheckRe, googleAuth } from "../controllers/auth.js";
+import { signin, signup,profile, getFollowing,followRequest,unfollowRequest, CheckRe, googleAuth } from "../controllers/auth.js";
 import {} from "../controllers/user.js";
 
 const router = express.Router();
@@ -17,6 +17,8 @@ router.get("/profile", profile);
 
 //Google Auth
 router.post("/followRequest/:followId/:followerId",followRequest)
-router.get("/getFollowing/:authorId/:UserId/getfollow",getFollowing)
+router.get("/getFollowing/:followId/:followerId/getfollow",getFollowing)
+
+router.post("/unfollowRequest/:followId/:followerId",unfollowRequest)
 router.post("/google",googleAuth)
-export default router;
+export default router;  

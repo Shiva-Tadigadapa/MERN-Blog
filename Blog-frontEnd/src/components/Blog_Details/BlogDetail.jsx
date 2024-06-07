@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetStates } from "use-context-provider";
+import BlogDetailsSkeleton from "../../skeleton/BlogDetailsSkeleton";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/userSlice";
+
 
 const BlogDetail = (props) => {
   const { AUname, id } = useParams();
   const { state } = GetStates();
   const blogDetails = props.blogDetails;
-
+  const userDetail = useSelector(selectUser);
   const [parsedContent, setParsedContent] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (blogDetails && blogDetails.content) {
@@ -26,12 +31,19 @@ const BlogDetail = (props) => {
 
         setParsedContent(filteredContent);
         console.log("Parsed JSON:", parsedData.content, filteredContent);
+        // setLoading(false);
       } catch (error) {
         console.error("Error parsing JSON:", error);
       }
     }
   }, [blogDetails]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds delay
 
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
   const renderTextContent = (textContent) => {
     if (!textContent) return null;
 
@@ -97,12 +109,19 @@ const BlogDetail = (props) => {
     const options = { month: "short", day: "numeric", year: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+
+  if (!userDetail || loading) {
+    return <BlogDetailsSkeleton />;
+  }
+
+            
+
   return (
     <>
-      <div className="bg-white overflow-hidden rounded-xl">
+      <div className="bg-white w-full overflow-hidden   rounded-xl">
         <img
           src={blogDetails.image}
-          className="h-[22rem] w-full object-cover"
+          className="h-[22rem] w-full overflow-hidden object-cover"
           alt="Blog Cover"
         />
         <div className="flex flex-col gap-3 px-16 py-5">
@@ -127,7 +146,7 @@ const BlogDetail = (props) => {
                 switch (item.attrs.level) {
                   case 1:
                     return (
-                      <h1 className="font-bold text-5xl mb-3" key={index}>
+                      <h1 className="font-bold text-4xl lg:text-5xl mb-3" key={index}>
                         {item.content && renderTextContent(item.content)}
                       </h1>
                     );

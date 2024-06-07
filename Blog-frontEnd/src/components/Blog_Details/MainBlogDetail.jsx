@@ -8,12 +8,17 @@ import { IoBookmarkOutline } from "react-icons/io5";
 import { CiShare1 } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa6";
 import Confetti from "react-confetti";
-
+import { GetStates } from "use-context-provider";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/userSlice";
 const MainBlogDetail = () => {
   const { AUname, id } = useParams();
   const [blogDetails, setBlogDetails] = useState([]);
   const [like, setLike] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
+  // const { state } = GetStates();
+  const userDetail = useSelector(selectUser);
+
 
   useEffect(() => {
     const getBlog = async () => {
@@ -29,7 +34,7 @@ const MainBlogDetail = () => {
     getBlog();
     const addView = async () => {
       try {
-        const response = await axios.post(`http://localhost:3000/blog/addview/${id}/view`);
+        const response = await axios.post(`https://backbone-l7ed.onrender.com/blog/addview/${id}/view`);
         console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -40,7 +45,7 @@ const MainBlogDetail = () => {
 
   const handleLike = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/blog/like/${id}`);
+      const response = await axios.post(`https://backbone-l7ed.onrender.com/blog/like/${id}`);
       console.log(response.data);
       setLike(response.data);
     
@@ -51,10 +56,10 @@ const MainBlogDetail = () => {
 
   return (
     <>
-      <div className="flex justify-center gap-4 px-5 py-10 max-w-[1400px] mt-3 bg-[#f5f5f5]">
+      <div className="lg:flex justify-center gap-4 px-5 py-10 mt-3 bg-[#f5f5f5]">
         <div>
           {/* {showConfetti && <Confetti className="mt-40" width={155} height={155} />} */}
-          <div className="p-4 rounded-xl flex flex-col gap-6 w-full sticky top-[10px]">
+          <div className="p-4 hidden rounded-xl  lg:flex flex-col gap-6 w-full sticky top-[10px]">
             <div className="flex justify-between flex-col items-center" onClick={handleLike}>
               <AiOutlineHeart className="text-3xl hover:text-red-500 hover:cursor-pointer" />
               <p>{(like && like) || (blogDetails && blogDetails.likes)}</p>
@@ -76,7 +81,7 @@ const MainBlogDetail = () => {
         <div className="bg-white rounded-xl border">
           {blogDetails && <BlogDetail blogDetails={blogDetails} />}
         </div>
-        <div className="sticky top-[10px]">
+        <div className="lg:sticky  sm:mt-10 lg:mt-0 lg:top-[10px] block lg:block">
           <div className="sticky top-[10px]">
             <BlogDetailSideBar blogDetails={blogDetails} />
           </div>

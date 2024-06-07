@@ -23,7 +23,7 @@ const LoginNav = () => {
   const [userName, setUserName] = NewState("UserName", "");
   const [Name, setName] = NewState("Name", "");
   const [authorMail, setAuthorMail] = NewState("AuthorMail", "");
-   
+
   //  setUserName(authorName);
   const dispatch = useDispatch();
 
@@ -81,7 +81,7 @@ const LoginNav = () => {
           setUserName(authorName);
           setName(res.data.name);
           setAuthorMail(res.data.email);
-         
+
           // setAuthorName(``)
           // navigate('/home')
         })
@@ -150,30 +150,27 @@ const LoginNav = () => {
         <a href="/home" className=" w-36 cursor-pointer">
           <img className="w-36" src={img} />
         </a>
-        <SearchBar />
+        <div className="hidden lg:block">
+          <SearchBar />
+        </div>
         {/* <input className='rounded-lg shadow-2xl pr-24 border-none  pl-5' type="text" placeholder='search'/> */}
-        <div className=" flex items-center">
-          <div className=" flex  text-md   ">
-            <p className="pr-10">
-              <a>
-                <Link to={`/home`}>Home</Link>
-              </a>
-            </p>
-            <p className="pr-10">
-              <a>
-                <Link to={`/MyBlogs/${id}`}>Blog</Link>
-              </a>
-            </p>
-            <p className="pr-10">
-              <a className="cursor-pointer">
-                <Link to={`/Profile/${authorName}`}>Profile</Link>
-              </a>
-            </p>
-            <p className="pr-10">
-              <a>
-                <Link to="/createBlog">createBlog</Link>
-              </a>
-            </p>
+        <div className=" hidden  lg:flex items-center">
+          <div className=" gap-10 flex  text-md   ">
+            <a>
+              <Link to={`/home`}>Home</Link>
+            </a>
+
+            <a>
+              <Link to={`/MyBlogs/${id}`}>Blog</Link>
+            </a>
+
+            <a className="cursor-pointer">
+              <Link to={`/Profile/${authorName}`}>Profile</Link>
+            </a>
+
+            <a>
+              <Link to="/createBlog">createBlog</Link>
+            </a>
           </div>
           <div className="flex  items-center justify-center">
             <p
