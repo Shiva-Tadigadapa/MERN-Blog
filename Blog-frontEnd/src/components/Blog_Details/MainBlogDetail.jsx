@@ -81,7 +81,7 @@ const MainBlogDetail = () => {
         <div className="bg-white rounded-xl border">
           {blogDetails && <BlogDetail blogDetails={blogDetails} />}
         </div>
-        <div className="lg:sticky  sm:mt-10 lg:mt-0 lg:top-[10px] block lg:block">
+        <div className="lg:sticky  mt-10 sm:mt-10 lg:mt-0 lg:top-[10px] block lg:block">
           <div className="sticky top-[10px]">
             <BlogDetailSideBar blogDetails={blogDetails} />
           </div>
