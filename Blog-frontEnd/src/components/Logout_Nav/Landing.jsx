@@ -20,9 +20,10 @@ const Landing = () => {
       // alert("You are already logged in");
       navigate("/home");
     } else {
+      navigate("/");
       setRedirect(false);
     }
-  }, [token, navigate]);
+  }, []);
   const handleSignUpClick = () => {
     setSignUpTrue(SignUpTrue ? false : true);
   };
