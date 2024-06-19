@@ -77,6 +77,7 @@ import authRoutes from "./routes/auth.js";
 import blogRoutes from "./routes/blog.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 app.use(express.json());
@@ -94,10 +95,23 @@ const connect = () => {
     });
 };
 
+// Configure rate limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: {
+    success: false,
+    status: 429,
+    message: "Too many requests, please try again later."
+  }
+});
+
+// Apply the rate limiter to all requests
+app.use(limiter);
+
 app.use(
   cors({
     origin: ["https://fork-to.netlify.app","https://spectacular-florentine-c71119.netlify.app","https://mern-blog-wine.vercel.app", "https://backbone-l7ed.onrender.com/", "http://localhost:3000","http://localhost:5173"],
-    // origin: "http://localhost:3000,
     credentials: true,
   })
 );
